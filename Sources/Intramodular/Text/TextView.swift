@@ -29,6 +29,7 @@ public struct TextView<Label: View>: View {
         var textColor: AppKitOrUIKitColor?
 		var tintColor: AppKitOrUIKitColor?
         var kerning: CGFloat?
+        var lineHeightMultiple: CGFloat = 1
         var linkForegroundColor: AppKitOrUIKitColor?
         var textContainerInset: AppKitOrUIKitInsets = .zero
         #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
@@ -211,7 +212,7 @@ extension _TextView: UIViewRepresentable {
             
             if requiresAttributedText {
                 let paragraphStyle = NSMutableParagraphStyle()
-                
+                paragraphStyle.lineHeightMultiple = configuration.lineHeightMultiple
                 paragraphStyle.lineBreakMode = context.environment.lineBreakMode
                 paragraphStyle.lineSpacing = context.environment.lineSpacing
                 
@@ -569,6 +570,10 @@ extension TextView {
     
     public func kerning(_ kerning: CGFloat) -> Self {
         then({ $0.configuration.kerning = kerning })
+    }
+    
+    public func lineHeightMultiple(_ lineHeightMultiple: CGFloat) -> Self {
+        then({ $0.configuration.lineHeightMultiple = lineHeightMultiple })
     }
     
     public func textContainerInset(_ textContainerInset: AppKitOrUIKitInsets) -> Self {
