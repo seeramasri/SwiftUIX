@@ -43,7 +43,7 @@ public struct TextView<Label: View>: View {
         #endif
         
         var requiresAttributedText: Bool {
-            kerning != nil
+            kerning != nil || lineHeightMultiple != 1
         }
     }
     
