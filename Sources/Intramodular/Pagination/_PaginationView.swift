@@ -163,6 +163,9 @@ extension _PaginationView: UIViewControllerRepresentable {
                 }
             }
             
+            if currentPageIndex < 0 || currentPageIndex > content.data.count {
+                return
+            }
             let newCurrentPageIndex = content.data.index(content.data.startIndex, offsetBy: currentPageIndex)
             
             if uiViewController.currentPageIndex != newCurrentPageIndex, uiViewController.content?.count == content.count {
